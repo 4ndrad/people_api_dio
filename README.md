@@ -2,4 +2,4 @@
 Projeto didático da Dio
 
 #### Deploy da API
-https://parking-ntn.herokuapp.com/api/v1/people
+https://peopleapi-ntn.herokuapp.com/api/v1/people
