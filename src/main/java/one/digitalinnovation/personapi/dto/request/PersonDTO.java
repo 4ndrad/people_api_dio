@@ -1,46 +1,50 @@
-package one.digitalinnovation.personapi.entity;
+package one.digitalinnovation.personapi.dto.request;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Builder;
+import one.digitalinnovation.personapi.entity.Phone;
 
-@Entity
 @Builder
-public class Person {
+public class PersonDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@NotEmpty
+	@Size(min = 2, max = 100)
 	private String firstName;
 	
-	@Column(nullable = false)
+	@NotEmpty
+	@Size(min = 3, max = 14)
 	private String lastName;
 	
-	@Column(nullable = false, unique = true)
+	@NotEmpty
+	@CPF
 	private String cpf;
 	
+	@NotNull
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate birthDate;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+	@Valid
+	@NotEmpty
 	private List<Phone> phones;
 	
-	public Person() {
+	public PersonDTO() {
 		
 	}
 
-	public Person(Long id, String firstName, String lastName, String cpf, LocalDate birthDate, List<Phone> phones) {
+	public PersonDTO(Long id, String firstName, String lastName, String cpf, LocalDate birthDate, List<Phone> phones) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -96,6 +100,4 @@ public class Person {
 	public void setPhones(List<Phone> phones) {
 		this.phones = phones;
 	}
-	
-	
 }

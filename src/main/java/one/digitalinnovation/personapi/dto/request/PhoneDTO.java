@@ -1,36 +1,30 @@
-package one.digitalinnovation.personapi.entity;
+package one.digitalinnovation.personapi.dto.request;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.Builder;
 import one.digitalinnovation.personapi.enums.PhoneType;
 
-@Entity
 @Builder
-public class Phone {
+public class PhoneDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
 	private PhoneType type;
 
-	@Column(nullable = false)
+	@NotEmpty
+	@Size(min = 13, max = 14)
 	private String number;
 	
-	public Phone() {
+	public PhoneDTO() {
 		
 	}
 
-	public Phone(Long id, PhoneType type, String number) {
+	public PhoneDTO(Long id, PhoneType type, String number) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -60,6 +54,4 @@ public class Phone {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
-	
 }
