@@ -35,7 +35,7 @@ public class PersonController {
 		return personService.create(dto);
 	}
 	
-	@GetMapping
+	@PutMapping
 	public List<PersonDTO> listAll(){
 		return personService.listAll();
 	}
