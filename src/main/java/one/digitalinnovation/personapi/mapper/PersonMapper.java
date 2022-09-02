@@ -7,6 +7,7 @@ import org.mapstruct.factory.Mappers;
 import one.digitalinnovation.personapi.dto.request.PersonDTO;
 import one.digitalinnovation.personapi.entity.Person;
 
+
 @Mapper(componentModel = "spring")
 public interface PersonMapper{
 	

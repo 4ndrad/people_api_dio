@@ -1,103 +1,41 @@
 package one.digitalinnovation.personapi.dto.request;
 
-import java.time.LocalDate;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
-import org.hibernate.validator.constraints.br.CPF;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import lombok.Builder;
-import one.digitalinnovation.personapi.entity.Phone;
-
+@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PersonDTO {
 
-	private Long id;
+    private Long id;
 
-	@NotEmpty
-	@Size(min = 2, max = 100)
-	private String firstName;
-	
-	@NotEmpty
-	@Size(min = 3, max = 14)
-	private String lastName;
-	
-	@NotEmpty
-	@CPF
-	private String cpf;
-	
-	@NotNull
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private LocalDate birthDate;
-	
-	@Valid
-	@NotEmpty
-	private List<Phone> phones;
-	
-	public PersonDTO() {
-		
-	}
+    @NotEmpty
+    @Size(min = 2, max = 100)
+    private String firstName;
 
-	public PersonDTO(Long id, String firstName, String lastName, String cpf, LocalDate birthDate, List<Phone> phones) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.cpf = cpf;
-		this.birthDate = birthDate;
-		this.phones = phones;
-	}
+    @NotEmpty
+    @Size(min = 2, max = 100)
+    private String lastName;
 
-	public Long getId() {
-		return id;
-	}
+    @NotEmpty
+    @CPF
+    private String cpf;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @NotNull
+    private String birthDate;
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public List<Phone> getPhones() {
-		return phones;
-	}
-
-	public void setPhones(List<Phone> phones) {
-		this.phones = phones;
-	}
+    @Valid
+    @NotEmpty
+    private List<PhoneDTO> phones;
 }

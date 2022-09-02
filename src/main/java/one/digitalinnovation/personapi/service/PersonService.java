@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import one.digitalinnovation.personapi.dto.request.PersonDTO;
 import one.digitalinnovation.personapi.dto.response.MessageResponseDTO;
 import one.digitalinnovation.personapi.entity.Person;
@@ -14,11 +15,12 @@ import one.digitalinnovation.personapi.mapper.PersonMapper;
 import one.digitalinnovation.personapi.repository.PersonRepository;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
 
-	@Autowired
 	private PersonRepository personRepository;
 	
+
 	private PersonMapper personMapper = PersonMapper.INSTANCE ;
 	
 	public MessageResponseDTO create( PersonDTO personDTO) {
@@ -53,7 +55,6 @@ public class PersonService {
 		verifyIfExists(id);
 		personRepository.deleteById(id);
 	}
-	
 	private Person verifyIfExists(Long id) throws PersonNotFoundException{
 		return personRepository.findById(id)
 				.orElseThrow(() -> new PersonNotFoundException(id));
